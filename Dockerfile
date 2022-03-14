@@ -66,13 +66,15 @@ RUN set -ex apk update --no-cache && apk upgrade --no-cache && apk add --no-cach
     rc-update add supervisord && \
     rc-update add nginx && \
     rc-update add redis && \
-    # WorkDir
+    # Working Dir
     rm -f /etc/nginx/conf.d/default.conf && \
     mkdir -p /data/nginx/wwwlogs /data/nginx/wwwroot && \
     mkdir /var/log/supervisor && \
     mkdir /etc/supervisor.d && \
     mkdir -p /etc/nginx/default.d && \
-    chown nobody. -R /data/nginx/wwwlogs /var/lib/nginx/tmp
+    chown nobody. -R /data/nginx/wwwlogs /var/lib/nginx/tmp && \
+    # Config File
+    curl -sfL https://raw.githubusercontent.com/fooz79/php-runtime/master/config/8.0/php.ini -o /etc/php/php.ini
 
 EXPOSE 80 6379
 
